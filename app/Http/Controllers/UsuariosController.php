@@ -18,6 +18,17 @@ class UsuariosController extends Controller
     }
 
     public function add(Request $request){
+        $validacao = $request->validate([
+            'nome' => 'required|min:3|max:100',
+            'cpf' => 'required|numeric|min:11',
+            'dt_nascimento' => 'required|date',
+            'email' => 'required',
+            'telefone' => 'required|numeric',
+            'endereco' => 'required',
+            'cidade' => 'required',
+            'estado' => 'required',
+            'cep' => 'required|numeric'
+        ]); 
         $usuario = new Usuario;
         $usuario = $usuario->create($request->all() );
         return Redirect::to('/usuarios');
@@ -39,5 +50,6 @@ class UsuariosController extends Controller
         $usuario->delete();
         return Redirect::to('/usuarios');
     }
+
 }
  

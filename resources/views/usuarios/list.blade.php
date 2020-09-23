@@ -40,7 +40,7 @@
                             @csrf
                             @method('delete')
                             <button class="btn btn-danger">Excluir</button>
-                            </form>
+                            </form>  
                         </td>
                         </tr>
                         @endforeach    
