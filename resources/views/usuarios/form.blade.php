@@ -29,17 +29,21 @@
                     @if(Request::is('*/edit'))
                     <form action="{{url('usuarios/update')}}/{{$usuarios->id}}" method="post">
                     @csrf
+                        
+                        
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Nome</label>
+                            <label for="inputNome">Nome</label>
                             <input type="text" name="nome" class="form-control" placeholder="Insira o Nome" value="{{$usuarios->nome}}">
                         </div>
+                            
                         <div class="form-group">
-                            <label for="exampleInputEmail1">CPF</label>
+                            <label for="InputCPF">CPF</label>
                             <input type="text" name="cpf" class="form-control" placeholder="Insira o CPF" value="{{$usuarios->cpf}}"
                             minlength="11" maxlength="11">
-                        </div>
+                        </div>>
+                                                
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Nascimento</label>
+                            <label for="InputNascimento">Nascimento</label>
                             <input type="text" name="dt_nascimento"class="form-control" placeholder="Insira a data de nascimento: aaaa/mm/dd"
                             value="{{$usuarios->dt_nascimento}}">
                         </div>
@@ -49,17 +53,17 @@
                             value="{{$usuarios->email}}">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Telefone</label>
+                            <label for="InputTelefone">Telefone</label>
                             <input type="text" name="telefone" class="form-control" placeholder="Insira o Telefone"
                             value="{{$usuarios->telefone}}">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">CEP</label>
+                            <label for="InputCEP">CEP</label>
                             <input type="text" name="cep" class="form-control" placeholder="Insira o CEP" 
                             value="{{$usuarios->cep}}" minlength="8" maxlength="8">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Endereço</label>
+                            <label for="InputEndereco">Endereço</label>
                             <input type="text" name="endereco" class="form-control" placeholder="Insira o Endereço"
                             value="{{$usuarios->endereco}}">
                         </div>
