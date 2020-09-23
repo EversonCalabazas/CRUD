@@ -44,7 +44,7 @@
                                                 
                         <div class="form-group">
                             <label for="InputNascimento">Nascimento</label>
-                            <input type="text" name="dt_nascimento"class="form-control" placeholder="Insira a data de nascimento: aaaa/mm/dd"
+                            <input type="date" name="dt_nascimento"class="form-control" placeholder="Insira a data de nascimento"
                             value="{{$usuarios->dt_nascimento}}">
                         </div>
                         <div class="form-group">
@@ -95,7 +95,7 @@
                         </div>
                         <div class="form-group">
                             <label >Nascimento</label>
-                            <input type="text" name="dt_nascimento"class="form-control" placeholder="Insira a data de nascimento: aaaa/mm/dd">
+                            <input type="date" name="dt_nascimento"class="form-control" placeholder="Insira a data de nascimento">
                         </div>
                         <div class="form-group">
                             <label >E-mail:</label>

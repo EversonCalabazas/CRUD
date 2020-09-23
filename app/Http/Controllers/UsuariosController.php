@@ -40,6 +40,17 @@ class UsuariosController extends Controller
     }
 
     public function update($id, Request $request){
+        $validacao = $request->validate([
+            'nome' => 'required|min:3|max:100',
+            'cpf' => 'required|numeric|min:11',
+            'dt_nascimento' => 'required|date',
+            'email' => 'required',
+            'telefone' => 'required|numeric',
+            'endereco' => 'required',
+            'cidade' => 'required',
+            'estado' => 'required',
+            'cep' => 'required|numeric'
+        ]);
         $usuario = Usuario::findOrFail($id);
         $usuario->update($request->all());
         return Redirect::to('/usuarios');
@@ -50,6 +61,8 @@ class UsuariosController extends Controller
         $usuario->delete();
         return Redirect::to('/usuarios');
     }
+
+    
 
 }
  
