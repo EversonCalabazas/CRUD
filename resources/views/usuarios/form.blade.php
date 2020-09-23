@@ -133,34 +133,47 @@
 </div>
 @endsection
 @push('script')
+
 <script>
-<script>
-        $.ajaxSetup({
-            headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-        });
-        $(document).ready(function(){
-           $("#cep").on('blur', function()
-           {
-               value = $(this).val();
-               if (value.length < 8)
-               {
-                   alert("Digite o cep");
-                   return;
-               }
-               $.post("/post/cep", {cep:value}, function(data)
-               {
-                   $("#endereco").val('');
-                   $("#cidade").val('');
-                   $("#estado").val('');
-                    if (data.sucesso != "0")
-                    {
-                        $("#endereco").val(data.rua);
-                        $("#cidade").val(data.cidade);
-                        $("#estado").val(data.estado);
-                    }
-               }, 'json');
-           });
-        });
+    function limpa_formulário_cep() {
+            document.getElementById('endereco').value=("");
+            document.getElementById('cidade').value=("");
+            document.getElementById('estado').value=("");
+    }
+
+    function meu_callback(conteudo) {
+        if (!("erro" in conteudo)) {
+            document.getElementById('endereco').value=(conteudo.logradouro);
+            document.getElementById('cidade').value=(conteudo.localidade);
+            document.getElementById('estado').value=(conteudo.uf);
+
+        } 
+        else {
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
+        
+    function pesquisacep(valor) {
+        var cep = valor.replace(/\D/g, '');
+        if (cep != "") {
+            var validacep = /^[0-9]{8}$/;
+            if(validacep.test(cep)) {
+                document.getElementById('rua').value="...";
+                document.getElementById('cidade').value="...";
+                document.getElementById('uf').value="...";
+                var script = document.createElement('script');
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+                document.body.appendChild(script);
+            } 
+            else {
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } 
+        else {
+            limpa_formulário_cep();
+        }
+    };
     </script>
-</script>
 @endpush

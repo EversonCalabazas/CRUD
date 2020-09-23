@@ -62,16 +62,6 @@ class UsuariosController extends Controller
         return Redirect::to('/usuarios');
     }
 
-    public function cep(Request $request)
-    {
-        $cep = $request->input('cep');
-        $url = "http://cep.republicavirtual.com.br/web_cep.php?formato=xml&cep=".$cep;
-        $reg = simplexml_load_file($url);
-        $dados['endereco'] = (string) $reg->tipo_logradouro.' '.$reg->logradouro;
-        $dados['cidade'] = (string) $reg->cidade;
-        $dados['estado'] = (string) $reg->uf;
-        return $dados;
-    }
-
+    
 }
  

@@ -16,5 +16,4 @@ Route::post('usuarios/add', 'UsuariosController@add')->middleware('auth');
 Route::get('usuarios/{id}/edit', 'UsuariosController@edit')->middleware('auth');
 Route::post('usuarios/update/{id}', 'UsuariosController@update')->middleware('auth');
 Route::delete('usuarios/delete/{id}', 'UsuariosController@delete')->middleware('auth');
-Route::post('/usuarios/cep', 'UsuariosController@cep')->middleware('auth');
 
