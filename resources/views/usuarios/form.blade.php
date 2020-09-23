@@ -59,22 +59,22 @@
                         </div>
                         <div class="form-group">
                             <label for="InputCEP">CEP</label>
-                            <input type="text" name="cep" class="form-control" placeholder="Insira o CEP" 
-                            value="{{$usuarios->cep}}" minlength="8" maxlength="8">
+                            <input type="text" name="cep" id="cep" class="form-control" placeholder="Insira o CEP" 
+                            onblur="pesquisacep(this.value);" value="{{$usuarios->cep}}" minlength="8" maxlength="8">
                         </div>
                         <div class="form-group">
                             <label for="InputEndereco">Endereço</label>
-                            <input type="text" name="endereco" class="form-control" placeholder="Insira o Endereço"
+                            <input type="text" name="endereco" id="endereco" class="form-control" placeholder="Insira o Endereço"
                             value="{{$usuarios->endereco}}">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Cidade</label>
-                            <input type="text" name="cidade" class="form-control" placeholder="Insira a Cidade"
+                            <label for="InputEmail1">Cidade</label>
+                            <input type="text" name="cidade" id="cidade" class="form-control" placeholder="Insira a Cidade"
                             value="{{$usuarios->cidade}}">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Estado</label>
-                            <input type="text" name="estado" class="form-control" placeholder="Insira o Estado"
+                            <label for="InputEstado">Estado</label>
+                            <input type="text" name="estado" id="estado" class="form-control" placeholder="Insira o Estado"
                             value="{{$usuarios->estado}}">
                         </div>
                         
@@ -132,3 +132,35 @@
     </div>
 </div>
 @endsection
+@push('script')
+<script>
+<script>
+        $.ajaxSetup({
+            headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+        });
+        $(document).ready(function(){
+           $("#cep").on('blur', function()
+           {
+               value = $(this).val();
+               if (value.length < 8)
+               {
+                   alert("Digite o cep");
+                   return;
+               }
+               $.post("/post/cep", {cep:value}, function(data)
+               {
+                   $("#endereco").val('');
+                   $("#cidade").val('');
+                   $("#estado").val('');
+                    if (data.sucesso != "0")
+                    {
+                        $("#endereco").val(data.rua);
+                        $("#cidade").val(data.cidade);
+                        $("#estado").val(data.estado);
+                    }
+               }, 'json');
+           });
+        });
+    </script>
+</script>
+@endpush
